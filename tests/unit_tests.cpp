@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "math_operations.h"
+#include "../math_operations.h"
 
 // Test case 'BasicAddition' verifies the correctness of the add function.
 TEST(BasicAddition, Correctness) {
