@@ -28,10 +28,26 @@ jobs:
         run: cmake -B build
 
       - name: Build project
-        run: cmake --build build
+        run: cmake --build build --config Debug
 
       - name: Run tests
         run: ctest --test-dir build -C Debug --output-on-failure
 
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-${{ matrix.os }}
+          path: build/Debug/hello*
+          retention-days: 30
+
+      - name: Upload test executable
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit_tests-${{ matrix.os }}
+          path: build/Debug/unit_tests*
+          retention-days: 30
+
       - name: Deploy
-        run: echo "Deploy step placeholder"
+        run: echo "Deploy step completed"
